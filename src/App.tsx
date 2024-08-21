@@ -1,13 +1,10 @@
 import './scss/app.scss';
-import Header from './components/Header.jsx';
-import { Home } from './pages/Home.jsx';
-import { NotFound } from './pages/NotFound.jsx';
-import { Outlet, Route, Routes } from 'react-router-dom';
-import { Cart } from './pages/Cart.jsx';
-import { useState } from 'react';
-import React from 'react';
-import { FullPizza } from './pages/FullPizza.jsx';
-import { MainLayout } from './layouts/MainLayout.jsx';
+import { Home } from './pages/Home';
+import { NotFound } from './pages/NotFound';
+import { Route, Routes } from 'react-router-dom';
+import { Cart } from './pages/Cart';
+import { FullPizza } from './pages/FullPizza';
+import { MainLayout } from './layouts/MainLayout';
 
 function App() {
   return (
