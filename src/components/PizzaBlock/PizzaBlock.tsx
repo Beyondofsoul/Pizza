@@ -5,7 +5,16 @@ import { Link } from 'react-router-dom';
 
 const typeNames = ['тонкая', 'традиционная'];
 
-function PizzaBlock({ id, title, price, imageUrl, sizes, types, rating }) {
+type PizzaBlockParams = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+};
+
+const PizzaBlock: React.FC<PizzaBlockParams> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = useState(0);
@@ -79,5 +88,5 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types, rating }) {
       </div>
     </div>
   );
-}
+};
 export default PizzaBlock;
