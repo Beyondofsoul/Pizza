@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSort, setSort } from '../redux/slices/filterSlice';
-type SortList = {
+import { selectSort, setSort, sortPropertyEnum } from '../redux/slices/filterSlice';
+
+export type SortList = {
   name: string;
-  sortProperty: string;
+  sortProperty: sortPropertyEnum;
 };
 
 export const list: SortList[] = [
-  { name: 'популярности (D)', sortProperty: 'rating' },
-  { name: 'популярности(A)', sortProperty: '-rating' },
-  { name: 'цене(D)', sortProperty: 'price' },
-  { name: 'цене(A)', sortProperty: '-price' },
-  { name: 'алфавиту(D)', sortProperty: 'title' },
-  { name: 'алфавиту(A)', sortProperty: '-title' },
+  { name: 'популярности (D)', sortProperty: sortPropertyEnum.RATING_DESC },
+  { name: 'популярности(A)', sortProperty: sortPropertyEnum.RATING_ASC },
+  { name: 'цене(D)', sortProperty: sortPropertyEnum.PRICE_DESC },
+  { name: 'цене(A)', sortProperty: sortPropertyEnum.PRICE_ASC },
+  { name: 'алфавиту(D)', sortProperty: sortPropertyEnum.TITLE_DESC },
+  { name: 'алфавиту(A)', sortProperty: sortPropertyEnum.TITLE_ASC },
 ];
 
 function Sort() {
@@ -28,16 +29,15 @@ function Sort() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
       }
     };
+
     document.body.addEventListener('click', handleClickOutside);
 
-    return () => {
-      document.body.removeEventListener('click', handleClickOutside);
-    };
+    return () => document.body.removeEventListener('click', handleClickOutside);
   }, []);
 
   return (
